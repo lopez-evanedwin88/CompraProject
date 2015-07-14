@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="upToolBar">#311B92</color>
+    <color name="ToolBar">#4527A0</color>
+    <color name="FAB">#BF360C</color>
+    <color name="background">#ECEFF1</color>
+</resources>
