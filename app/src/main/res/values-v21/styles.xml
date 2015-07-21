@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/ToolBar</item>
         <item name="android:colorPrimaryDark">@color/upToolBar</item>
         <item name="android:colorAccent">@color/FAB</item>
+        <item name="android:editTextColor">@color/FAB</item>
+        <item name="android:ems">@color/FAB</item>
     </style>
 
     <style name="Widget.CardContent" parent="android:Widget">
