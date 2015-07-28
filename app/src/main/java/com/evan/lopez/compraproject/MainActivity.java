@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements  InterfaceItemVie
         bar.setVisibility(View.GONE);
         list = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,new ArrayList<String>());
         item.setAdapter(list);
+        populateView();
     }
 
     @Override

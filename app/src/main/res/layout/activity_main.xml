@@ -41,6 +41,7 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="fill_vertical"
@@ -84,12 +85,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"/>
 
-                <ListView
-                    android:id="@+id/listview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    ></ListView>
-
             </LinearLayout>
 
 
@@ -97,6 +92,16 @@
 
 
     </android.support.v4.widget.NestedScrollView>
+
+    <ListView
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="50dp"
+        app:layout_anchor="@id/nested"
+        app:layout_anchorGravity="bottom"
+        ></ListView>
 
 
     <include
