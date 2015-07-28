@@ -1,5 +1,6 @@
 package com.evan.lopez.compraproject;
 
+import android.database.Cursor;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -8,10 +9,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+
+import java.util.ArrayList;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 
 public class MainActivity extends AppCompatActivity implements  InterfaceItemView{
@@ -28,14 +36,24 @@ public class MainActivity extends AppCompatActivity implements  InterfaceItemVie
     @Bind(R.id.edtItem)
     EditText edtItem;
 
+    @Bind(R.id.loadingBar)
+    ProgressBar bar;
+
+    @Bind(R.id.listview)
+    ListView item;
+
+    ItemPresenter mainpresenter;
+    ArrayAdapter<String> list;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setSupportActionBar(toolbar);
-        ItemPresenter mainpresenter = new ItemPresenter(this,this);
-
+        mainpresenter = new ItemPresenter(this,this);
+        bar.setVisibility(View.GONE);
+        list = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1,new ArrayList<String>());
+        item.setAdapter(list);
     }
 
     @Override
@@ -62,18 +80,51 @@ public class MainActivity extends AppCompatActivity implements  InterfaceItemVie
 
     @Override
     public void showProgress() {
-
+        bar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideProgress() {
-
+        bar.setVisibility(View.GONE);
     }
 
     @Override
     public void setItemError() {
+        edtItem.setError(getString(R.string.error));
+    }
+
+    @Override
+    public void displayitem(String name) {
+        list.add(name);
+        list.notifyDataSetChanged();
+    }
+
+    @OnClick(R.id.fab)
+    public void submit (View v)
+    {
+        mainpresenter.validateItem(edtItem.getText().toString());
+        edtItem.setText("");
+    }
+
+
+    public void populateView()
+    {
+        Cursor c = this.getContentResolver().query(Provider.CONTENT_URI, null, null, null, null);
+
+        //   ArrayList<String> itemList = new ArrayList<String>();
+
+        if (c.moveToFirst())
+        {
+            do
+            {
+                list.add(c.getString(c.getColumnIndex("_name")));
+            }
+            while (c.moveToNext());
+        }
+        list.notifyDataSetChanged();
 
     }
+
 
 
 }

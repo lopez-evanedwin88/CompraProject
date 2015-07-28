@@ -34,6 +34,7 @@ public class ItemPresenter {
     public void Success(String name)
     {
         Toast.makeText(context,"snackbar ta dri", Toast.LENGTH_SHORT).show();
+        view.displayitem(name);
         view.hideProgress();
         //pass to mainactivity sa list
 

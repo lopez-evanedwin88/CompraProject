@@ -10,4 +10,6 @@ public interface InterfaceItemView {
     public void hideProgress();
 
     public void setItemError();
+
+    public void displayitem(String name);
 }

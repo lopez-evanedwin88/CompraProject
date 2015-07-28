@@ -28,7 +28,6 @@ public class ItemModel {
                     values.put("_name", name);
                     Uri uri = context.getContentResolver().insert(Provider.CONTENT_URI,values);
                     listen.Success(name);
-
 //                    main.list.add(name);
 //                    main.list.notifyDataSetChanged();
                 }
